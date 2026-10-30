@@ -6,16 +6,24 @@
  */
 public class GuitarString 
 {
+    RingBuffer ring;
     public GuitarString(double frequency) 
     {
+        ring = new RingBuffer((int)(44100/frequency));
     }
 
     public GuitarString(double[] array) 
     {
+        ring = new RingBuffer((int)(array.length));
+        for(int i = 0; i < array.length; i++)
+        {
+            ring.add(array[i]);
+        }
     }
 
     public void pluck() 
     {
+        for(int i = 0; i < ring.size(); i++)
     }
 
     // advance the simulation one time step
