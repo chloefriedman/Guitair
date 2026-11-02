@@ -58,19 +58,12 @@ public class RingBuffer
     
     public double peek()
     {
-         if(isEmpty()){
-            throw new QueueUnderflowException("No elements in the queue");
-        }
-        else
-        return queue[headInd];
+            return queue[headInd];
     }
     
-    public double remove() throws QueueUnderflowException
+    public double remove()
     {
-           if(isEmpty()){
-            throw new QueueUnderflowException("No elements in the queue");
-        }
-        else{
+    
             double current = queue[headInd];
             queue[headInd] = 0.0;
             size--;
@@ -87,7 +80,6 @@ public class RingBuffer
                 }
             }
             return current;
-        }
     }
     
     // a simple test of the constructor and methods in RingBuffer

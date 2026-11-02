@@ -7,6 +7,7 @@
 public class GuitarString 
 {
     RingBuffer ring;
+    private int ticTime = 0;
     public GuitarString(double frequency) 
     {
         ring = new RingBuffer((int)(44100/frequency));
@@ -24,23 +25,29 @@ public class GuitarString
     public void pluck() 
     {
         for(int i = 0; i < ring.size(); i++)
+        {
+            ring.add(Math.random() - .5);
+        }
     }
 
     // advance the simulation one time step
     public void tic() 
     {
+        double first = ring.remove();
+        ring.add((first + ring.peek())/2 * .994 );
+        ticTime++;
     }
 
     // return the current sample
     public double sample() 
     {
-        return 0.0;
+        return ring.peek();
     }
 
     // return number of times tic was called
     public int time() 
     {
-        return 0;
+        return ticTime;
     }
 
     public static void main(String[] args) 
