@@ -36,18 +36,23 @@ public class RingBuffer
     
     public void add(double value) throws OverflowException
     {
-          if(isEmpty()){
+        if(isFull())
+        {
+            throw new OverflowException("full");
+        }
+        if(isEmpty())
+        {
             headInd = 0;
             tailInd = 0;
-            }
-            else{
-            if(isFull()){
-                throw new OverflowException("Full");
-            }
-            if(tailInd == queue.length - 1){
+        }
+        else
+        {
+            if(tailInd == queue.length - 1)
+            {
                 tailInd = 0;
             }
-            else{
+            else
+            {
                 tailInd++;
             }
         }

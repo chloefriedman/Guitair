@@ -10,7 +10,12 @@ public class GuitarString
     private int ticTime = 0;
     public GuitarString(double frequency) 
     {
-        ring = new RingBuffer((int)(44100/frequency));
+        int capacity = (int)(44100 / frequency);
+        ring = new RingBuffer(capacity);
+        for(int i = 0; i < capacity; i++)
+        {
+            ring.add(0.0);
+        }
     }
 
     public GuitarString(double[] array) 
@@ -24,7 +29,12 @@ public class GuitarString
 
     public void pluck() 
     {
-        for(int i = 0; i < ring.size(); i++)
+        int c = ring.size();
+        for(int j = 0; j < c; j++)
+        {
+            ring.remove();
+        }
+        for(int i = 0; i < c; i++)
         {
             ring.add(Math.random() - .5);
         }
